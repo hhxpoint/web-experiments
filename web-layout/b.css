@@ -1,0 +1,212 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Microsoft YaHei", sans-serif;
+  background: radial-gradient(circle at top, #fff4cf 0%, #f6e1a0 30%, #f4e8c7 100%);
+  color: #3a2e1f;
+}
+
+.wrapper {
+  width: 980px;
+  margin: 26px auto;
+  border: 1px solid #e6a22f;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(153, 96, 21, 0.16);
+}
+
+.top {
+  padding: 20px 28px 12px;
+  background: linear-gradient(180deg, #ffe894 0%, #ffd14f 100%);
+}
+
+.brand {
+  margin: 0;
+  font-size: 36px;
+  color: #d06f00;
+  letter-spacing: 2px;
+}
+
+.brand small {
+  display: block;
+  margin-top: 4px;
+  font-size: 18px;
+  color: #8c540b;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #db8c14;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.nav a {
+  display: block;
+  padding: 10px 4px;
+  text-align: center;
+  text-decoration: none;
+  color: #603b0a;
+  font-size: 19px;
+  font-weight: 700;
+  background: linear-gradient(180deg, #ffc840 0%, #f0a80c 100%);
+  border-right: 1px solid #dc9520;
+}
+
+.nav li:last-child a {
+  border-right: 0;
+}
+
+.nav a:hover {
+  background: linear-gradient(180deg, #ffd863, #f1b737);
+}
+
+.nav a.active {
+  background: linear-gradient(180deg, #ffdf76, #ffc12c);
+  color: #4d2f07;
+}
+
+.content {
+  padding: 22px 30px 32px;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.simple-panel {
+  border: 2px solid #f3ac26;
+  background: #fff7df;
+  padding: 24px;
+  font-size: 28px;
+  color: #5c3e13;
+  line-height: 1.7;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin: 0 0 18px;
+  font-size: 42px;
+  color: #31a6c7;
+}
+
+.title .dot {
+  margin-right: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffd35a;
+  border: 3px solid #f2af12;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #f3ac26;
+  font-size: 30px;
+}
+
+.cart-table th,
+.cart-table td {
+  border: 2px solid #f3ac26;
+  padding: 10px;
+}
+
+.cart-table th {
+  text-align: center;
+  color: #ffffff;
+  background: linear-gradient(180deg, #fdb223, #ef9f0a);
+}
+
+.cart-table td input {
+  width: 94px;
+  font-size: 26px;
+  padding: 4px 6px;
+  border: 1px solid #d2b47f;
+}
+
+.remove-btn {
+  padding: 5px 10px;
+  font-size: 22px;
+  border: 1px solid #b0b0b0;
+  background: #f4f4f4;
+  color: #5c5c5c;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: #ffffff;
+}
+
+.summary {
+  margin-top: 16px;
+  text-align: right;
+  font-size: 40px;
+  font-weight: 700;
+  color: #422f18;
+}
+
+.actions {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.actions button {
+  margin: 0 8px;
+  padding: 8px 18px;
+  font-size: 24px;
+  border: 1px solid #989898;
+  background: #efefef;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: #fff;
+}
+
+.notice {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 20px;
+  color: #8b6a35;
+}
+
+@media (max-width: 1080px) {
+  .wrapper {
+    width: calc(100% - 24px);
+  }
+
+  .nav {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .cart-table {
+    font-size: 22px;
+  }
+
+  .cart-table td input {
+    font-size: 20px;
+    width: 76px;
+  }
+
+  .summary {
+    font-size: 30px;
+  }
+}

@@ -1,0 +1,60 @@
+<meta charset="utf-8">
+<title>管理员监控台</title>
+<style>
+  .player{ border:1px solid #000; margin:10px; padding:10px; display:inline-block; }
+  video{ width:280px; margin:4px; }
+</style>
+
+<div id="container"></div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const roomId = 'race-test';
+const socket = io();
+const pcs = {};
+
+socket.emit('join-room', roomId, 'admin');
+
+socket.on('new-player', async (uid) => {
+  createPlayerBlock(uid);
+});
+
+socket.on('offer', async (offer, uid) => {
+  const pc = new RTCPeerConnection({
+    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+  });
+  pcs[uid] = pc;
+
+  let idx = 0;
+  pc.ontrack = e => {
+    const el = idx === 0
+      ? document.getElementById(`cam-${uid}`)
+      : document.getElementById(`screen-${uid}`);
+    el.srcObject = e.streams[0];
+    idx++;
+  };
+
+  pc.onicecandidate = e => {
+    if (e.candidate) socket.emit('ice', roomId, e.candidate, uid);
+  };
+
+  await pc.setRemoteDescription(offer);
+  const ans = await pc.createAnswer();
+  await pc.setLocalDescription(ans);
+  socket.emit('answer', roomId, ans, uid);
+});
+
+socket.on('ice', (ice, uid) => pcs[uid]?.addIceCandidate(ice));
+
+function createPlayerBlock(uid) {
+  const div = document.createElement('div');
+  div.className = 'player';
+  div.innerHTML = `
+    <h4>选手 ${uid}</h4>
+    <div>摄像头：</div>
+    <video id="cam-${uid}" autoplay playsinline></video>
+    <div>桌面：</div>
+    <video id="screen-${uid}" autoplay playsinline></video>
+  `;
+  document.getElementById('container').appendChild(div);
+}
+</script>

@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<div>选手编号：<input id="uid" value="p1"></div>
+<button onclick="start()">开始共享桌面 + 摄像头</button>
+<video id="local" muted autoplay playsinline width=320></video>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const roomId = 'race-test';
+const socket = io();
+let pc;
+
+async function start() {
+  const uid = document.getElementById('uid').value;
+  socket.emit('join-room', roomId, 'player', uid);
+
+  pc = new RTCPeerConnection({
+    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+  });
+
+  const cam = await navigator.mediaDevices.getUserMedia({ video: true });
+  const screen = await navigator.mediaDevices.getDisplayMedia({ video: true });
+
+  document.getElementById('local').srcObject = cam;
+
+  cam.getTracks().forEach(t => pc.addTrack(t, cam));
+  screen.getTracks().forEach(t => pc.addTrack(t, screen));
+
+  pc.onicecandidate = e => {
+    if (e.candidate) socket.emit('ice', roomId, e.candidate, uid);
+  };
+
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  socket.emit('offer', roomId, offer, uid);
+
+  socket.on('answer', ans => pc.setRemoteDescription(ans));
+  socket.on('ice', ice => pc.addIceCandidate(ice));
+}
+</script>

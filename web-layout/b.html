@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实验2 - JavaScript购物车</title>
+  <link rel="stylesheet" href="b.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header class="top">
+      <h1 class="brand">皮皮宠物网<small>www.mrppc.com</small></h1>
+      <ul class="nav" id="navTabs">
+        <li><a href="#" data-tab="home">网站首页</a></li>
+        <li><a href="#" data-tab="news">宠物新闻</a></li>
+        <li><a href="#" data-tab="hospital">宠物医院</a></li>
+        <li><a href="#" data-tab="latest">最新宠物</a></li>
+        <li><a href="#" data-tab="sale">特价宠物</a></li>
+        <li><a href="#" data-tab="cart" class="active">查看购物车</a></li>
+        <li><a href="#" data-tab="order">查看订单</a></li>
+      </ul>
+    </header>
+
+    <main class="content">
+      <h2 class="title"><span class="dot"></span>查看购物车</h2>
+
+      <section class="tab-panel" data-panel="home">
+        <div class="simple-panel">欢迎来到皮皮宠物网，点击上方栏目浏览宠物信息与下单功能。</div>
+      </section>
+
+      <section class="tab-panel" data-panel="news">
+        <div class="simple-panel">宠物新闻：春季驱虫知识讲座本周六开启，在线报名享 9 折优惠。</div>
+      </section>
+
+      <section class="tab-panel" data-panel="hospital">
+        <div class="simple-panel">宠物医院：提供常规体检、疫苗接种、外科手术与术后护理服务。</div>
+      </section>
+
+      <section class="tab-panel" data-panel="latest">
+        <div class="simple-panel">最新宠物：本周新到英短、柯基、银狐等热门宠物，支持线上预约。</div>
+      </section>
+
+      <section class="tab-panel" data-panel="sale">
+        <div class="simple-panel">特价宠物：限时活动进行中，部分宠物立减 200 元，先到先得。</div>
+      </section>
+
+      <section class="tab-panel active" data-panel="cart">
+        <table class="cart-table" id="cartTable">
+          <thead>
+            <tr>
+              <th>品名</th>
+              <th>单价</th>
+              <th>数量</th>
+              <th>金额</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="cartBody"></tbody>
+        </table>
+
+        <div class="summary">合计金额：<span id="totalPrice">0</span></div>
+
+        <div class="actions">
+          <button id="updateBtn">修改订单</button>
+          <button id="continueBtn">继续购物</button>
+          <button id="clearBtn">清空购物车</button>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-panel="order">
+        <div class="simple-panel">查看订单：当前暂无历史订单，可先在“查看购物车”中提交商品。</div>
+      </section>
+
+      <div class="notice" id="notice">提示：可直接修改数量后点击“修改订单”。</div>
+    </main>
+  </div>
+
+  <script src="b.js"></script>
+</body>
+</html>
